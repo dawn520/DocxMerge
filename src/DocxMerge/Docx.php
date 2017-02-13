@@ -210,11 +210,8 @@ class Docx {
         $this->docxZip->Flush(TBSZIP_FILE, $tempFile);
 
         // Replace current file with tempFile content
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            copy( $tempFile, $this->docxPath );
-        }
-        else {
-            rename($tempFile, $this->docxPath);
+        if ( copy($tempFile, $this->docxPath) ) {
+            unlink($tempFile);
         }
     }
 
